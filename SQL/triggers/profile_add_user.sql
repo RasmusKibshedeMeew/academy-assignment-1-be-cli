@@ -4,7 +4,7 @@ BEGIN
 INSERT INTO public.profile(id) VALUES (new.id);
 return new;
 END
-$$ language 'plpgsql';
+$$ language 'plpgsql' security definer;
 
 DROP TRIGGER IF EXISTS profile_add_user_trigger ON auth.users;
 
