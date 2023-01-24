@@ -1,4 +1,5 @@
 import { Entity, Column, ManyToMany, JoinTable, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Pokemon } from '../Pokemon';
 import { IOSSubscription } from '../subscriptions/IOSSubscription';
 import { Role } from './Role';
 
@@ -14,19 +15,19 @@ export class Profile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ nullable: true })
   first_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   last_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   age: number;
 
   @Column({ default: false })
   subscription_active: boolean;
 
-  @ManyToMany(() => Role, { cascade: ['insert', 'update'] })
+  @ManyToMany(() => Role, { cascade: ['insert', 'update'], nullable: true })
   @JoinTable({
     name: 'profile_role_junction',
     joinColumn: {
@@ -44,4 +45,8 @@ export class Profile {
     referencedColumnName: 'id',
   })
   ios_subscription_fk: IOSSubscription;
+
+
+  @ManyToMany(() => Pokemon, ((pokemon) => pokemon.profiles))
+  pokemon: Pokemon[]
 }
