@@ -15,7 +15,14 @@ export class Pokemon {
     description: string
 
     @ManyToMany(() => Profile, (profile) => profile.pokemon)
-    @JoinTable()
+    @JoinTable({
+        joinColumn: {
+            name: 'pokemon_id',
+        },
+        inverseJoinColumn: {
+            name: 'profile_id',
+        },
+    })
     profiles: Profile[]
 
 

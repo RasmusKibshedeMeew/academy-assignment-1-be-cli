@@ -6,7 +6,7 @@ CREATE POLICY pokemon_profiles_profile_select
 ON public.pokemon_profiles_profile
 AS PERMISSIVE
 FOR SELECT TO authenticated USING (
-  auth.uid() = "profileId"
+  auth.uid() = profile_id
 );
 
 /* INSERT */
@@ -15,7 +15,7 @@ CREATE POLICY pokemon_profiles_profile_insert
 ON public.pokemon_profiles_profile
 AS PERMISSIVE
 FOR INSERT TO authenticated WITH CHECK (
-  auth.uid() = "profileId"
+  auth.uid() = profile_id
 );
 
 /* DELETE */
@@ -24,6 +24,6 @@ CREATE POLICY pokemon_profiles_profile_delete
 ON public.pokemon_profiles_profile
 AS PERMISSIVE
 FOR DELETE TO authenticated USING (
-  auth.uid() = "profileId"
+  auth.uid() = profile_id
 );
 
